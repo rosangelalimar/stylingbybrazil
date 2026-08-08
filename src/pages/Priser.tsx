@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PageHero from '../components/PageHero';
 
 interface PriceCategory {
   title: string;
@@ -446,11 +445,30 @@ export default function Priser() {
 
   return (
     <div>
-      <PageHero
-        title="Priser"
-        subtitle="Våra behandlingar och aktuella priser"
-      />
+      {/* Hero */}
+      <section className="relative h-[280px] md:h-[380px] overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1564141696939-9eb6e957ccfc?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcnxlbnwwfHwwfHx8MA%3D%3D"
+          alt="Hår och skönhet"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
+        <div className="absolute inset-0 bg-black/35" />
+
+        <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-light text-white">
+              Priser
+            </h1>
+
+            <p className="mt-3 text-white/90 text-sm md:text-base">
+              Våra behandlingar och priser
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Price List */}
       <section className="py-10 md:py-16">
         <div className="container max-w-5xl">
 
@@ -471,7 +489,9 @@ export default function Priser() {
               {priceList.map(category => (
                 <button
                   key={category.title}
-                  onClick={() => handleCategoryChange(category.title)}
+                  onClick={() =>
+                    handleCategoryChange(category.title)
+                  }
                   className={`px-4 py-2.5 rounded-full whitespace-nowrap text-sm transition-all duration-300 flex-shrink-0 ${
                     selectedCategory === category.title
                       ? 'bg-beige-500 text-white'
@@ -497,7 +517,9 @@ export default function Priser() {
                   {/* Category Header */}
                   <button
                     type="button"
-                    onClick={() => toggleCategory(category.title)}
+                    onClick={() =>
+                      toggleCategory(category.title)
+                    }
                     className="w-full flex items-center justify-between gap-4 px-5 py-4 md:px-6 md:py-5 text-left hover:bg-beige-50 transition-colors"
                   >
                     <div>
@@ -566,4 +588,3 @@ export default function Priser() {
     </div>
   );
 }
-
