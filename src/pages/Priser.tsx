@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
 import PageHero from '../components/PageHero';
-import {
-  Scissors,
-  Sparkles,
-  Eye,
-  Star,
-  Zap,
-  Heart,
-  Dumbbell,
-  Hand,
-  Waves
-} from 'lucide-react';
 
 interface PriceCategory {
   title: string;
@@ -19,81 +8,6 @@ interface PriceCategory {
     price: string;
   }[];
 }
-
-const treatments = [
-  {
-    title: "Klippning",
-    description: "Professionell hårklippning för dam, herr och barn.",
-    icon: Scissors,
-    color: "beige"
-  },
-  {
-    title: "Styling & Hårvård",
-    description: "Styling, fön, hårvård och avancerade behandlingar för ett friskt och vackert hår.",
-    icon: Sparkles,
-    color: "beige"
-  },
-  {
-    title: "Färg & Slingor",
-    description: "Färgning, slingor, balayage och avancerade färgbehandlingar.",
-    icon: Sparkles,
-    color: "beige"
-  },
-  {
-    title: "Keratin & Protein",
-    description: "Keratin- och proteinbehandlingar för ett slätare och friskare hår.",
-    icon: Zap,
-    color: "beige"
-  },
-  {
-    title: "Laser Permanent Hårborttagning",
-    description: "Effektiv permanent hårborttagning med laser.",
-    icon: Star,
-    color: "beige"
-  },
-  {
-    title: "Brasiliansk Vaxning",
-    description: "Vaxbehandlingar för dam och herr.",
-    icon: Heart,
-    color: "beige"
-  },
-  {
-    title: "Bryn och Fransar",
-    description: "Framhäv din naturliga skönhet med bryn- och fransbehandlingar.",
-    icon: Eye,
-    color: "beige"
-  },
-  {
-    title: "Ansiktsbehandlingar",
-    description: "Avancerad hudvård, ansiktsföryngring och kemisk peeling.",
-    icon: Sparkles,
-    color: "beige"
-  },
-  {
-    title: "Kroppskulptering & Celluliter",
-    description: "Moderna behandlingar för kroppskonturering, muskelstimulering och fettreducering.",
-    icon: Dumbbell,
-    color: "beige"
-  },
-  {
-    title: "Kroppspeeling",
-    description: "Mekanisk rengöring och peeling av kroppen.",
-    icon: Waves,
-    color: "beige"
-  },
-  {
-    title: "Klassisk Massage & Friskvård",
-    description: "Avslappning och friskvårdsbehandlingar för hela kroppen.",
-    icon: Heart,
-    color: "beige"
-  },
-  {
-    title: "Permanent Lack, Manikyr & Pedikyr",
-    description: "Professionell manikyr och pedikyr med permanent gellack.",
-    icon: Hand,
-    color: "beige"
-  }
-];
 
 const priceList: PriceCategory[] = [
   {
@@ -505,10 +419,30 @@ const priceList: PriceCategory[] = [
 
 export default function Priser() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [openCategory, setOpenCategory] = useState<string | null>(
+    priceList[0]?.title || null
+  );
 
   const filteredPriceList = priceList.filter(
-    category => !selectedCategory || category.title === selectedCategory
+    category =>
+      !selectedCategory || category.title === selectedCategory
   );
+
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+
+    if (category) {
+      setOpenCategory(category);
+    } else {
+      setOpenCategory(priceList[0]?.title || null);
+    }
+  };
+
+  const toggleCategory = (title: string) => {
+    setOpenCategory(current =>
+      current === title ? null : title
+    );
+  };
 
   return (
     <div>
@@ -517,104 +451,114 @@ export default function Priser() {
         subtitle="Våra behandlingar och aktuella priser"
       />
 
-      {/* Treatment Categories */}
-      <section className="py-16 bg-beige-50">
-        <div className="container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {treatments.map((treatment, index) => (
-              <div
-                key={index}
-                className="group relative bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden"
-              >
-                <div className="absolute -right-8 -bottom-8 opacity-5 transform rotate-12 group-hover:rotate-45 transition-transform duration-700">
-                  <treatment.icon className="w-32 h-32" />
-                </div>
-
-                <div className="relative">
-                  <div className="inline-flex items-center justify-center p-3 rounded-lg mb-4 bg-beige-50 text-beige-500">
-                    <treatment.icon className="w-6 h-6" />
-                  </div>
-
-                  <h3 className="text-xl font-light mb-2">
-                    {treatment.title}
-                  </h3>
-
-                  <p className="text-neutral-600 text-sm">
-                    {treatment.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Price List Section */}
-      <section className="py-24">
+      <section className="py-10 md:py-16">
         <div className="container max-w-5xl">
 
           {/* Category Filter */}
-          <div className="flex gap-2 overflow-x-auto price-categories-scroll mb-8">
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300
-                ${
+          <div className="mb-8">
+            <div className="flex gap-2 overflow-x-auto pb-3 price-categories-scroll">
+              <button
+                onClick={() => handleCategoryChange(null)}
+                className={`px-4 py-2.5 rounded-full whitespace-nowrap text-sm transition-all duration-300 flex-shrink-0 ${
                   !selectedCategory
                     ? 'bg-beige-500 text-white'
-                    : 'bg-white text-neutral-600 hover:bg-beige-50'
+                    : 'bg-beige-50 text-neutral-600 hover:bg-beige-100'
                 }`}
-            >
-              Alla
-            </button>
+              >
+                Alla behandlingar
+              </button>
 
-            {priceList.map((category, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCategory(category.title)}
-                className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300
-                  ${
+              {priceList.map(category => (
+                <button
+                  key={category.title}
+                  onClick={() => handleCategoryChange(category.title)}
+                  className={`px-4 py-2.5 rounded-full whitespace-nowrap text-sm transition-all duration-300 flex-shrink-0 ${
                     selectedCategory === category.title
                       ? 'bg-beige-500 text-white'
-                      : 'bg-white text-neutral-600 hover:bg-beige-50'
+                      : 'bg-beige-50 text-neutral-600 hover:bg-beige-100'
                   }`}
-              >
-                {category.title}
-              </button>
-            ))}
+                >
+                  {category.title}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Price Categories */}
-          <div className="space-y-8">
-            {filteredPriceList.map((category, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-neutral-100
-                  transform hover:scale-[1.02] transition-all duration-500"
-              >
-                <div className="bg-gradient-to-r from-beige-400 to-beige-500 px-6 py-4">
-                  <h2 className="text-xl text-white font-light">
-                    {category.title}
-                  </h2>
-                </div>
+          <div className="space-y-3">
+            {filteredPriceList.map(category => {
+              const isOpen = openCategory === category.title;
 
-                <div className="divide-y divide-neutral-100">
-                  {category.services.map((service, serviceIndex) => (
-                    <div
-                      key={serviceIndex}
-                      className="flex justify-between items-center px-6 py-4 hover:bg-beige-50 transition-colors duration-200"
-                    >
-                      <span className="text-neutral-700">
-                        {service.name}
-                      </span>
+              return (
+                <div
+                  key={category.title}
+                  className="bg-white border border-neutral-200 rounded-xl overflow-hidden"
+                >
+                  {/* Category Header */}
+                  <button
+                    type="button"
+                    onClick={() => toggleCategory(category.title)}
+                    className="w-full flex items-center justify-between gap-4 px-5 py-4 md:px-6 md:py-5 text-left hover:bg-beige-50 transition-colors"
+                  >
+                    <div>
+                      <h2 className="text-lg md:text-xl font-light text-neutral-800">
+                        {category.title}
+                      </h2>
 
-                      <span className="text-beige-500 font-medium whitespace-nowrap ml-4">
-                        {service.price}
-                      </span>
+                      <p className="text-xs md:text-sm text-neutral-500 mt-1">
+                        {category.services.length}{' '}
+                        {category.services.length === 1
+                          ? 'behandling'
+                          : 'behandlingar'}
+                      </p>
                     </div>
-                  ))}
+
+                    <span
+                      className={`text-neutral-500 text-2xl font-light transition-transform duration-300 ${
+                        isOpen ? 'rotate-45' : ''
+                      }`}
+                    >
+                      +
+                    </span>
+                  </button>
+
+                  {/* Services */}
+                  <div
+                    className={`grid transition-all duration-300 ${
+                      isOpen
+                        ? 'grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="border-t border-neutral-100">
+                        {category.services.map(
+                          (service, serviceIndex) => (
+                            <div
+                              key={serviceIndex}
+                              className={`flex items-start justify-between gap-4 px-5 py-4 md:px-6 ${
+                                serviceIndex !==
+                                category.services.length - 1
+                                  ? 'border-b border-neutral-100'
+                                  : ''
+                              }`}
+                            >
+                              <span className="text-sm md:text-base text-neutral-700 leading-relaxed">
+                                {service.name}
+                              </span>
+
+                              <span className="text-sm md:text-base text-beige-600 font-medium whitespace-nowrap">
+                                {service.price}
+                              </span>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
@@ -622,3 +566,4 @@ export default function Priser() {
     </div>
   );
 }
+
