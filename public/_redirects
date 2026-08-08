@@ -1,0 +1,14 @@
+/* /index.html 200
+/frisor-solna /frisor-solna.html 200
+/frisor-ostermalm /frisor-ostermalm.html 200
+
+# Redirect old paths to home
+/boka /index.html 301
+/kontakt /index.html 301
+/om-oss /index.html 301
+/galleri /index.html 301
+/tjanster /index.html 301
+/prislista /priser 301
+
+# Redirect all 404s to home
+/* /index.html 200

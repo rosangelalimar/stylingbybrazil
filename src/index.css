@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-neutral-800 bg-white;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-lavender-500 to-mint-400;
+  }
+
+  .service-card {
+    @apply relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500;
+  }
+
+  .service-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-rose-100/20 via-lavender-100/20 to-mint-100/20 opacity-0 transition-opacity duration-500;
+  }
+
+  .service-card:hover::before {
+    @apply opacity-100;
+  }
+}
+
+/* Price Categories Scrollbar */
+.price-categories-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.beige.400') transparent;
+  padding-bottom: 12px;
+}
+
+.price-categories-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.price-categories-scroll::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.price-categories-scroll::-webkit-scrollbar-thumb {
+  @apply bg-beige-400 rounded-full;
+}
+
+.price-categories-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-beige-500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-fade-in-delayed {
+  animation: fadeIn 1s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delayed-2 {
+  animation: fadeIn 1s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(20px) rotate(-5deg);
+  }
+}
+
+.floating-icon {
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.15;
+}
+
+.floating-icon-reverse {
+  animation: floatReverse 7s ease-in-out infinite;
+  opacity: 0.15;
+}
+
+/* Background Patterns */
+.pattern-grid-lg {
+  background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Scrollbar - Global */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-beige-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-beige-500;
+}
+
+/* Modern scrollbar for team member specialties */
+.scrollbar-modern {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.beige.400') transparent;
+}
+
+.scrollbar-modern::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-modern::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-modern::-webkit-scrollbar-thumb {
+  @apply bg-beige-400 rounded-full;
+}
+
+.scrollbar-modern::-webkit-scrollbar-thumb:hover {
+  @apply bg-beige-500;
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-beauty {
+  background: linear-gradient(135deg, 
+    rgba(251,113,133,0.1) 0%,
+    rgba(139,92,246,0.1) 50%,
+    rgba(34,197,94,0.1) 100%
+  );
+}
+
+/* Custom Gradients */
+.gradient-overlay-primary {
+  background: linear-gradient(to right,
+    rgba(251, 113, 133, 0.8),
+    rgba(167, 139, 250, 0.8)
+  );
+}
+
+.gradient-overlay-secondary {
+  background: linear-gradient(to right,
+    rgba(139, 92, 246, 0.8),
+    rgba(34, 197, 94, 0.8)
+  );
+}
+
+.gradient-text-primary {
+  background: linear-gradient(to right,
+    #fb7185,
+    #a78bfa
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(to right,
+    #fb7185,
+    #a78bfa,
+    #4ade80
+  );
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
