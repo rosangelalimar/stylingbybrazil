@@ -7,7 +7,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [frisorDropdownOpen, setFrisorDropdownOpen] = useState(false);
-  const [showAnnouncement, setShowAnnouncement] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,26 +36,8 @@ export default function Header() {
 
   return (
     <>
-      {showAnnouncement && (
-        <div className="hidden md:block fixed w-full z-50 top-0">
-          <div className="bg-neutral-900 text-white py-2 px-4">
-            <div className="container mx-auto flex items-center justify-between">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <MapPin className="w-4 h-4" />
-                <span>OBS: Just nu har vi vaxning på götgatan 81 i salong baresso, Ring för mer information för vi har begränsade tider. Boka online nedanför.</span>
-              </div>
-              <button
-                onClick={() => setShowAnnouncement(false)}
-                className="text-white/60 hover:text-white transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       <header 
-        className={`fixed w-full transition-all duration-500 z-50 ${showAnnouncement ? 'md:top-8' : 'top-0'}
+        className={`fixed w-full transition-all duration-500 z-50 top-0
         ${scrolled 
           ? 'bg-white/95 backdrop-blur-sm shadow-lg' 
           : 'bg-gradient-to-b from-black/50 to-transparent'}`}
