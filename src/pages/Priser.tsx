@@ -1,4 +1,3 @@
-```tsx
 import React, { useState } from 'react';
 import PageHero from '../components/PageHero';
 import {
@@ -623,4 +622,3 @@ export default function Priser() {
     </div>
   );
 }
-```
