@@ -159,9 +159,6 @@ export default function TeamSection() {
                           <p className="text-neutral-800 font-medium text-xl mb-2">{loc.name}</p>
                           <p className="text-neutral-600">{loc.address}</p>
                           <p className="text-neutral-500">{loc.postal}</p>
-                          {loc.name === "Södermalm" && (
-                        
-                          )}
                         </div>
                       ))}
                     </div>
