@@ -321,7 +321,7 @@ export default function TeamSection() {
                       </div>
                       <div className="flex-1">
                         <h4 className="text-lg font-medium text-neutral-800 mb-1">Södermalm</h4>
-                        <p className="text-sm text-neutral-600">Götgatan 81</p>
+                        <p className="text-sm text-neutral-600">blekingegatan 57</p>
                       </div>
                       <Calendar className="w-5 h-5 text-[#D4B78F] group-hover:scale-110 transition-transform" />
                     </div>
